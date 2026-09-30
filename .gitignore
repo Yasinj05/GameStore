@@ -1,0 +1,12 @@
+# Build outputs
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio and IDE files
+.vs/
+*.user
+*.suo
+*.sln.docstates
+
+# macOS files
+.DS_Store
