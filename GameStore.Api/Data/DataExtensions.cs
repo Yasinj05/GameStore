@@ -11,14 +11,15 @@ public static class DataExtensions
         var dbContext = scope.ServiceProvider.GetRequiredService<GameStoreContext>();
         dbContext.Database.Migrate();
     }
-
     public static void AddGameStoreDb(this WebApplicationBuilder builder)
     {
         var connectionString = builder.Configuration.GetConnectionString("GameStore");
 
-        builder.Services.AddSqlite<GameStoreContext>(
-            connectionString,
-            optionsAction: options => options.UseSeeding((context, _) =>
+        builder.Services.AddDbContext<GameStoreContext>(options =>
+        {
+            options.UseSqlServer(connectionString);
+
+            options.UseSeeding((context, _) =>
             {
                 if (!context.Set<Genre>().Any())
                 {
@@ -29,10 +30,9 @@ public static class DataExtensions
                         new Genre { Name = "Simulation" },
                         new Genre { Name = "Strategy" }
                     );
+                    context.SaveChanges();
                 }
-
-                context.SaveChanges();
-            })
-        );
+            });
+        });
     }
 }
