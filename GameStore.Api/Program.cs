@@ -5,6 +5,9 @@ using GameStore.Api.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddValidation();
 builder.AddGameStoreDb();
 
@@ -17,6 +20,12 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 var app = builder.Build();
 
 app.UseExceptionHandler();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.MapGamesEndpoints();
 app.MapGenresEndpoints();
