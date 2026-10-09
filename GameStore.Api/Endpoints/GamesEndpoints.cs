@@ -68,6 +68,7 @@ public static class GamesEndpoints
             existingGame.GenreId = updatedGame.GenreId;
             existingGame.Price = updatedGame.Price;
             existingGame.ReleaseDate = updatedGame.ReleaseDate;
+            existingGame.Version = updatedGame.Version;
 
             await gameRepository.UpdateAsync(existingGame, ct);
             return Results.NoContent();

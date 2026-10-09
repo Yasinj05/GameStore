@@ -26,6 +26,7 @@ public static class GameMapping
         game.Name,
         game.GenreId,
         game.Price,
-        game.ReleaseDate
+        game.ReleaseDate,
+        game.Version
     );
 }
